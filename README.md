@@ -9,7 +9,7 @@ This project is a RESTful Web Service built using Java JAX-RS (Jersey). It is de
 
 3. Data Integrity: The system enforces business rules, such as preventing the deletion of rooms that still contain active sensors and ensuring unique IDs for all resources.
 
-###Report
+### Report
 Q1) 
 Explain the default lifecycle of a JAX-RS Resource class. Is a new instance instantiated for every incoming request, or does the runtime treat it as a singleton? Elaborate on how this architectural decision impacts the way you manage and synchronize your in-memory data structures (maps/lists) to prevent data loss or race conditions.
 By default, the JAX-RS runtime adopts a per-request lifecycle for resource classes. This means that for every incoming HTTP request, the container instantiates a new object of the resource class. Once the response is generated and sent back to the client, this instance is discarded. This architectural decision was  made in order to keep web services stateless. By creating a fresh instance for every request, JAX-RS ensures that no residual state from a previous user leak into a subsequent request. 
