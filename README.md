@@ -16,12 +16,12 @@ Q1)
 By default, the JAX-RS runtime adopts a per-request lifecycle for resource classes. This means that for every incoming HTTP request, the container instantiates a new object of the resource class. Once the response is generated and sent back to the client, this instance is discarded. This architectural decision was  made in order to keep web services stateless. By creating a fresh instance for every request, JAX-RS ensures that no residual state from a previous user leak into a subsequent request. 
 Because the resource instance is short-lived, any data stored in instance variables will be lost immediately after the request cycle ends. To maintain a permanent collection of data in an in-memory system, the focus needs to be shifted towards a static context.
 However, shifting data to a static context introduces significant complexity regarding concurrency.
-•	Modern servlet containers e.g.: Tomcat use a thread-pool approach. While each request gets its own Resource Object, multiple Threads are executing simultaneously, all trying to access the same static Map or List.
-•	If two clients attempt to POST a new sensor at the exact same time, a standard HashMap could experience a race condition. This might lead to data corruption, where one sensor overwrites another.
+- Modern servlet containers e.g.: Tomcat use a thread-pool approach. While each request gets its own Resource Object, multiple Threads are executing simultaneously, all trying to access the same static Map or List.
+- If two clients attempt to POST a new sensor at the exact same time, a standard HashMap could experience a race condition. This might lead to data corruption, where one sensor overwrites another.
 In order to mitigate this, the following measures could be taken.
-•	Using atomic methods like putIfAbsent() to prevent uninterrupted operations.
+- Using atomic methods like putIfAbsent() to prevent uninterrupted operations.
 
-•	Using classes from the java.util.concurrent package, which allows concurrent reading and bucket-level locking for writes, significantly improving performance under high load.
+- Using classes from the java.util.concurrent package, which allows concurrent reading and bucket-level locking for writes, significantly improving performance under high load.
 
 
 Q2)
