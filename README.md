@@ -62,7 +62,7 @@ This project is a RESTful Web Service built using Java JAX-RS (Jersey). It is de
    ```python
    curl -X GET "http://localhost:8080/SmartCampus/api/v1/sensors?type=Temperature" -H "Accept: application/json"
    ```
-### Report
+### Report Answers
 Q1)
 
 ##### Explain the default lifecycle of a JAX-RS Resource class. Is a new instance instantiated for every incoming request, or does the runtime treat it as a singleton? Elaborate on how this architectural decision impacts the way you manage and synchronize your in-memory data structures (maps/lists) to prevent data loss or race conditions.
