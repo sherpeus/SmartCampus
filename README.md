@@ -9,6 +9,24 @@ This project is a RESTful Web Service built using Java JAX-RS (Jersey). It is de
 
 3. Data Integrity: The system enforces business rules, such as preventing the deletion of rooms that still contain active sensors and ensuring unique IDs for all resources.
 
+### Sample curl Commands
+1. **Create a New Room.**
+   
+   ```curl -X POST http://localhost:8080/SmartCampus/api/v1/rooms -H "Content-Type: application/json" -H "Accept:application/json" -d "{\"id\":\"ROOM-001\",\"name\":\"LIBRARY\",\"capacity\":100}"```
+
+2. **Retrieve the Stored Rooms.**
+
+   ```curl -X GET http://localhost:8080/SmartCampus/api/v1/rooms -H "Accept: application/json"```
+3. **Retrieve a specific room via its ID.**
+
+   ```curl -X GET http://localhost:8080/SmartCampus/api/v1/rooms/ROOM-001 -H "Accept: application/json"```
+4. **Registering a new Sensor.**
+
+   ```curl -X POST http://localhost:8080/SmartCampus/api/v1/sensors -H "Content-Type: application/json" -d "{\"id\":\"TEMP-001\",\"type\":\"Temperature\",\"status\":\"ACTIVE\",\"currentValue\":111,\"roomId\":\"ROOM-001\"}"```
+
+5. **Filter Sensors Using Query Parameters**
+
+   ```curl -X GET "http://localhost:8080/SmartCampus/api/v1/sensors?type=Temperature" -H "Accept: application/json"```
 ### Report
 Q1) 
 *Explain the default lifecycle of a JAX-RS Resource class. Is a new instance instantiated for every incoming request, or does the runtime treat it as a singleton? Elaborate on how this architectural decision impacts the way you manage and synchronize your in-memory data structures (maps/lists) to prevent data loss or race conditions.*
